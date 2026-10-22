@@ -1,0 +1,33 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="logo-section">
+      <img src="assets/andar.jpg" alt="Andar Bolivia Logo" class="brand-logo">
+      <h3>ANDAR BOLIVIA</h3>
+      <p>Calzado Artesanal desde 1986</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="form-field">
+        <label>Correo Electrónico</label>
+        <input type="email" formControlName="email" placeholder="usuario@correo.com">
+      </div>
+
+      <div class="form-field">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="••••••••">
+      </div>
+
+      <div class="captcha-container">
+        <p>Seguridad: Resuelva la suma</p>
+        <div class="captcha-row">
+          <span class="math-text">{{num1}} + {{num2}} = </span>
+          <input type="number" formControlName="captcha" class="captcha-input">
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" class="btn-primary">
+        INGRESAR AL SISTEMA
+      </button>
+    </form>
+  </div>
+</div>

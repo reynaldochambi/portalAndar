@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer-site">
+  <div class="footer-container">
+    
+    <!-- Columna 1: Marca y Propuesta de Valor -->
+    <div class="footer-col brand-col">
+      <div class="footer-brand">
+        <img src="assets/andar.jpg" alt="Andar Bolivia" class="footer-logo">
+        <span class="footer-brand-name">ANDAR BOLIVIA</span>
+      </div>
+      <p class="brand-desc">
+        Tradición y elegancia artesanal desde 1986. Calzado masculino 100% cuero de res elaborado a mano en La Paz, Bolivia.
+      </p>
+      <div class="hecho-en-bolivia-badge">
+        <span>🇧🇴 HECHO EN BOLIVIA</span>
+      </div>
+    </div>
+
+    <!-- Columna 2: Enlaces Rápidos -->
+    <div class="footer-col links-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/catalog">Catálogo de Calzado</a></li>
+        <li><a routerLink="/ofertas">Ofertas de Temporada</a></li>
+        <li><a routerLink="/taller">Nuestro Taller</a></li>
+        <li><a routerLink="/contacto">Contactos</a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 3: Contacto & Atención al Cliente -->
+    <div class="footer-col contact-col">
+      <h4>Contacto y Ventas</h4>
+      <ul class="contact-info">
+        <li>
+          <span class="icon">📍</span>
+          <span>La Paz, Bolivia</span>
+        </li>
+        <li>
+          <span class="icon">💬</span>
+          <a href="https://wa.me/59177573434" target="_blank" class="wa-link">
+            WhatsApp: +591 77573434
+          </a>
+        </li>
+        <li>
+          <span class="icon">📦</span>
+          <span>Ventas al Por Mayor y Menor</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Barra Inferior de Copyright -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p>&copy; 2026 <strong>Andar Bolivia</strong> - Todos los derechos reservados.</p>
+      <p class="dev-credits">Desarrollado por <span>SAMINI System</span></p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,154 @@
+<div class="offers-wrapper">
+  <!-- Cabecera de la Sección -->
+  <header class="offers-header">
+    <span class="badge-promo">OPORTUNIDADES EXCLUSIVAS</span>
+    <h2>Ofertas de Temporada</h2>
+    <p>Calzado 100% cuero de res con descuentos especiales por tiempo limitado. Calidad y tradición a un precio excepcional.</p>
+    
+    <!-- Contador de Tiempo Limitado -->
+    <!-- <div class="countdown-bar">
+      <span class="countdown-label">Las ofertas terminan en:</span>
+      <div class="timer">
+        <div class="time-block"><span>{{ horas }}</span><small>Hs</small></div>
+        <div class="time-block"><span>{{ minutos }}</span><small>Min</small></div>
+        <div class="time-block"><span>{{ segundos }}</span><small>Seg</small></div>
+      </div>
+    </div>-->
+  </header>
+
+  <!-- Estado de Carga / Sin Productos -->
+  <div *ngIf="ofertas.length === 0" class="no-offers">
+    <p>Cargando ofertas exclusivas de Andar Bolivia...</p>
+  </div>
+
+  <!-- Rejilla de Tarjetas de Ofertas -->
+  <div class="offers-grid" *ngIf="ofertas.length > 0">
+    <div class="offer-card" *ngFor="let producto of ofertas" (click)="abrirDetalle(producto)">
+      <!-- Badge de Descuento -->
+      <div class="discount-badge">
+        -{{ calcularPorcentaje(producto.precio, producto.precioAnterior) }}%
+      </div>
+
+      <!-- Contenedor de Imagen -->
+      <div class="img-container">
+        <img [src]="producto.colores[0]?.imagen" [alt]="producto.nombre">
+        <div class="sello-bolivia">HECHO EN BOLIVIA</div>
+      </div>
+
+      <!-- Información del Producto -->
+      <div class="info-card">
+        <span class="categoria-tag">{{ producto.categoria }}</span>
+        <h3>{{ producto.nombre }}</h3>
+        <p class="material-text">Cuero {{ producto.material }}</p>
+
+        <div class="price-box">
+          <span class="precio-antiguo">Bs {{ producto.precioAnterior }}</span>
+          <span class="precio-oferta">Bs {{ producto.precio }}</span>
+        </div>
+
+        <button class="btn-oferta" (click)="$event.stopPropagation(); abrirDetalle(producto)">
+          Aprovechar Oferta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Vista Rápida -->
+<div class="modal-overlay" *ngIf="zapatoSeleccionado" (click)="cerrarDetalle()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-x" (click)="cerrarDetalle()">×</button>
+    <div class="modal-body-vertical">
+      
+      <!-- Previsualización de Imagen Dinámica por Color (Tamaño optimizado) -->
+      <div class="modal-img-container">
+        <img [src]="imagenVistaPrevia" [alt]="zapatoSeleccionado.nombre">
+        <span class="badge-modal">Ahorras Bs {{ zapatoSeleccionado.precioAnterior - zapatoSeleccionado.precio }}</span>
+      </div>
+
+      <!-- Información del Producto y Opciones -->
+      <div class="modal-info">
+        <div class="header-info-row">
+          <div>
+            <span class="categoria-tag">{{ zapatoSeleccionado.categoria }}</span>
+            <h2>{{ zapatoSeleccionado.nombre }}</h2>
+          </div>
+          <div class="modal-price-box-top">
+            <span class="old-price">Bs {{ zapatoSeleccionado.precioAnterior * cantidad }}</span>
+            <span class="current-price">Bs {{ zapatoSeleccionado.precio * cantidad }}</span>
+          </div>
+        </div>
+
+        <!-- Material e Interior en líneas separadas y con mejor tipografía -->
+        <div class="specs-box">
+          <p><strong>Material:</strong> {{ zapatoSeleccionado.material }}</p>
+          <p><strong>Interior:</strong> {{ zapatoSeleccionado.detalles }}</p>
+        </div>
+        
+        <!-- Selección de Colores -->
+        <div class="options-box">
+          <p><strong>Color:</strong> <span class="selected-label">{{ colorSeleccionado?.nombre }}</span></p>
+          <div class="colores-grid">
+            <button 
+              *ngFor="let c of zapatoSeleccionado.colores" 
+              class="color-item"
+              [class.selected]="c.nombre === colorSeleccionado?.nombre"
+              (click)="setColor(c)">
+              <img [src]="c.imagen" [alt]="c.nombre">
+              <span>{{ c.nombre }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Fila compartida para Talla y Cantidad -->
+        <div class="talla-cantidad-row">
+          <div class="options-box flex-grow">
+            <p><strong>Talla:</strong></p>
+            <div class="tallas-grid">
+              <button 
+                *ngFor="let t of zapatoSeleccionado.tallas" 
+                class="talla-item"
+                [class.selected]="t === tallaSeleccionada"
+                (click)="setTalla(t)">
+                {{ t }}
+              </button>
+            </div>
+          </div>
+
+          <div class="options-box">
+            <p><strong>Cantidad:</strong></p>
+            <div class="quantity-selector">
+              <button class="btn-qty" (click)="modificarCantidad(-1)" [disabled]="cantidad <= 1">-</button>
+              <span class="qty-number">{{ cantidad }}</span>
+              <button class="btn-qty" (click)="modificarCantidad(1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón Directo a WhatsApp -->
+        <button 
+          class="btn-whatsapp-modal" 
+          [disabled]="!tallaSeleccionada || !colorSeleccionado"
+          (click)="enviarAWhatsApp()">
+          PEDIR POR WHATSAPP 💬
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Sección de Campañas Especiales -->
+<div class="offers-container">
+  <h2>Promociones y Campañas Especiales</h2>
+
+  <div class="campaign-tabs">
+    <button [class.active]="campanaActiva === 'padre'" (click)="filtrarCampana('padre')">👨‍👧 Día del Padre</button>
+    <button [class.active]="campanaActiva === 'navidad'" (click)="filtrarCampana('navidad')">🎄 Navidad</button>
+    <button [class.active]="campanaActiva === 'estudiante'" (click)="filtrarCampana('estudiante')">🎓 Día del Estudiante</button>
+  </div>
+
+  <div class="banner-destacado" *ngIf="bannerActual">
+    <img [src]="bannerActual.imagen" [alt]="bannerActual.titulo" class="img-banner">
+  </div>
+</div>

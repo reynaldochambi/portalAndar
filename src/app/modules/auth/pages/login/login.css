@@ -1,0 +1,94 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(77, 38, 24, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border-top: 8px solid var(--andar-brown);
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.brand-logo {
+  width: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--andar-leather);
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: var(--andar-brown);
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.captcha-container {
+  background: #fdf5f2;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px dashed var(--andar-leather);
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.captcha-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.captcha-input {
+  width: 80px;
+}
+
+.btn-primary {
+  background-color: var(--andar-brown);
+  color: white;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--andar-leather);
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

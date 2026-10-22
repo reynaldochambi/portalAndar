@@ -1,0 +1,115 @@
+<div class="catalog-wrapper">
+  <div class="header-catalog">
+    <h2>Catálogo de Calzado Artesanal</h2>
+        <div class="filtros">
+          <button [class.active]="categoriaActiva === 'Todos'" (click)="filtrar('Todos')">Todos</button>
+          <button [class.active]="categoriaActiva === 'Militar'" (click)="filtrar('Militar')">Militares / Botas</button>
+          <button [class.active]="categoriaActiva === 'Casual'" (click)="filtrar('Casual')">Casuales / Mocasines</button>
+          <button [class.active]="categoriaActiva === 'Vestir'" (click)="filtrar('Vestir')">Formales / Oxford</button>
+        </div>
+  </div>
+
+  <div *ngIf="productosFiltrados.length === 0" class="no-products">
+    Cargando productos de Andar Bolivia...
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let p of productosFiltrados" (click)="abrirDetalle(p)">
+      <div class="img-container">
+        <img [src]="p.colores && p.colores.length > 0 ? p.colores[0].imagen : ''" [alt]="p.nombre">
+      </div>
+      <div class="info-card">
+        <h3>{{ p.nombre }}</h3>
+        <p class="material-text">{{ p.material }}</p>
+        <div class="footer-card">
+          <span class="precio-text">Bs {{ p.precio }}</span>
+          <button class="btn-ver">Ver detalle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Vista Rápida del Catálogo -->
+<div class="modal-overlay" *ngIf="zapatoSeleccionado" (click)="cerrarDetalle()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-x" (click)="cerrarDetalle()">×</button>
+    <div class="modal-body-vertical">
+      
+      <!-- Previsualización de Imagen Dinámica por Color -->
+      <div class="modal-img-container">
+        <img [src]="imagenVistaPrevia" [alt]="zapatoSeleccionado.nombre">
+      </div>
+
+      <!-- Información del Producto y Opciones -->
+      <div class="modal-info">
+        <div class="header-info-row">
+          <div>
+            <span class="categoria-tag">{{ zapatoSeleccionado.categoria || 'Catálogo' }}</span>
+            <h2>{{ zapatoSeleccionado.nombre }}</h2>
+          </div>
+          <div class="modal-price-box-top">
+            <span class="current-price">Bs {{ zapatoSeleccionado.precio * cantidad }}</span>
+          </div>
+        </div>
+
+        <!-- Material e Interior en líneas separadas -->
+        <div class="specs-box">
+          <p><strong>Material:</strong> {{ zapatoSeleccionado.material }}</p>
+          <p *ngIf="zapatoSeleccionado.detalles"><strong>Interior:</strong> {{ zapatoSeleccionado.detalles }}</p>
+        </div>
+        
+        <!-- Selección de Colores (Dinámico según el catálogo provisto) -->
+        <div class="options-box" *ngIf="zapatoSeleccionado.colores && zapatoSeleccionado.colores.length > 0">
+          <p><strong>Color:</strong> <span class="selected-label">{{ colorSeleccionado?.nombre }}</span></p>
+          <div class="colores-grid">
+            <button 
+              *ngFor="let c of zapatoSeleccionado.colores" 
+              class="color-item"
+              [class.selected]="c.nombre === colorSeleccionado?.nombre"
+              (click)="setColor(c)">
+              <img [src]="c.imagen" [alt]="c.nombre">
+              <span>{{ c.nombre }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Fila compartida para Talla y Cantidad -->
+<!-- Fila compartida para Talla y Cantidad -->
+<div class="talla-cantidad-row">
+  <div class="options-box flex-grow">
+    <p><strong>Talla:</strong> <span class="selected-label" *ngIf="tallaSeleccionada">{{ tallaSeleccionada }}</span></p>
+    <div class="tallas-grid">
+      <button 
+        type="button"
+        *ngFor="let t of zapatoSeleccionado?.tallas || [37,38,39,40,41,42]" 
+        class="talla-item"
+        [class.selected]="t === tallaSeleccionada"
+        (click)="setTalla(t)">
+        {{ t }}
+      </button>
+    </div>
+  </div>
+
+  <div class="options-box">
+    <p><strong>Cantidad:</strong></p>
+    <div class="quantity-selector">
+      <button type="button" class="btn-qty" (click)="modificarCantidad(-1)" [disabled]="cantidad <= 1">-</button>
+      <span class="qty-number">{{ cantidad }}</span>
+      <button type="button" class="btn-qty" (click)="modificarCantidad(1)">+</button>
+    </div>
+  </div>
+</div>
+
+        <!-- Botón Añadir al Carrito / WhatsApp -->
+        <button 
+          class="btn-whatsapp-modal" 
+          [disabled]="(zapatoSeleccionado.tallas?.length > 0 && !tallaSeleccionada) || (zapatoSeleccionado.colores?.length > 0 && !colorSeleccionado)"
+          (click)="confirmarCompra()">
+          AÑADIR AL CARRITO 💬
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="taller-container">
+  <header class="taller-hero">
+    <h1>Nuestra Historia & Taller</h1>
+    <p class="subtitle">Más de tres décadas elaborando calzado artesanal de varón con pasión y fe.</p>
+  </header>
+
+  <section class="taller-intro">
+    <div class="intro-card">
+      <h2>Tradición Artesanal en Cada Detalle</h2>
+      <p>
+        La producción de nuestro calzado cuenta con una serie de etapas artesanales cuidadosamente ejecutadas.
+        Desde la selección del cuero fino hasta el armado y cosido final, cada par garantiza la calidad,
+        resistencia y comodidad que caracteriza a la familia <strong>Andar Bolivia</strong>.
+      </p>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <h2>Nuestra Trayectoria</h2>
+
+    <div class="timeline">
+      <div class="timeline-item left">
+        <div class="timeline-icon">🔨</div>
+        <div class="timeline-content">
+          <span class="year">10 de Febrero, 1986</span>
+          <h3>El Inicio de un Sueño Familiar</h3>
+          <p>
+            Iniciamos labores en un taller sencillo en la ciudad de La Paz. Nace Andar como un proyecto familiar
+            dedicado a la confección artesanal de calzados de varón de alta durabilidad.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="timeline-icon">🏙️</div>
+        <div class="timeline-content">
+          <span class="year">Crecimiento Local</span>
+          <h3>Identidad en Nuestras Calles</h3>
+          <p>
+            Nuestros calzados comenzaron a recorrer y vestir las calles más comerciales de las ciudades de
+            <strong>La Paz</strong> y <strong>El Alto</strong>, construyendo una relación de confianza directas con nuestros clientes.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item left">
+        <div class="timeline-icon">👞</div>
+        <div class="timeline-content">
+          <span class="year">Año 2018</span>
+          <h3>Evolución Empresarial</h3>
+          <p>
+            Iniciamos nuestra segunda etapa: la transformación hacia un proyecto empresarial formalizado,
+            modernizando nuestros procesos de gestión sin perder la esencia artesanal de nuestra fabricación.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="timeline-icon">🙏</div>
+        <div class="timeline-content">
+          <span class="year">Presente</span>
+          <h3>Agradecimiento y Fe</h3>
+          <p>
+            Damos las gracias a Dios por permitirnos llevar el pan y un plato de comida a nuestros hogares,
+            fruto del trabajo honesto y del esfuerzo diario de elaborar calzado boliviano de calidad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ferias-section">
+  <h3>Nuestro Taller</h3>
+  
+  <div class="galeria-grid">
+    <div class="galeria-item" *ngFor="let img of fotosTrayectoria">
+      <img [src]="img.url" [alt]="img.descripcion" loading="lazy">
+      <div class="overlay">
+        <span>{{ img.descripcion }}</span>
+      </div>
+    </div>
+  </div>
+  </section>
+</div>

@@ -1,0 +1,51 @@
+<div class="cart-page">
+  <h1>Tu Carrito de Compras</h1>
+
+  <div class="cart-container" *ngIf="articulos.length > 0; else emptyCart">
+    <div class="items-list">
+      <div class="cart-item" *ngFor="let item of articulos; let i = index">
+        <!-- Usa la imagen del color seleccionado si está disponible, o la primera por defecto -->
+        <img [src]="item.colorSeleccionado?.imagen || item.imagenes[0]" [alt]="item.nombre">
+        <div class="item-details">
+          <h3>{{ item.nombre }}</h3>
+          <p class="material-text">{{ item.material }}</p>
+          <div class="item-specs">
+            <span *ngIf="item.colorSeleccionado"><strong>Color:</strong> {{ item.colorSeleccionado.nombre }}</span>
+            <span *ngIf="item.tallaSeleccionada"> | <strong>Talla:</strong> {{ item.tallaSeleccionada }}</span>
+            <span> | <strong>Cant:</strong> {{ item.cantidad }}</span>
+          </div>
+          <span class="item-price">Bs {{ item.precio * item.cantidad }}</span>
+        </div>
+        <button class="btn-remove" (click)="eliminar(i)" title="Eliminar producto">🗑️</button>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <h2>Resumen</h2>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>Bs {{ total }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Envío (La Paz/Nacional)</span>
+        <span class="free">Gratis</span>
+      </div>
+      <hr>
+      <div class="summary-row total">
+        <span>TOTAL</span>
+        <span>Bs {{ total }}</span>
+      </div>
+      <button class="btn-checkout" (click)="finalizarPedido()">
+        CONFIRMAR PEDIDO POR WHATSAPP 💬
+      </button>
+      <p class="nota">Hecho a mano, con cuero 100% natural.</p>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-state">
+      <p>Aún no has elegido tus próximos Andar.</p>
+      <button routerLink="/catalog" class="btn-back">VER CATÁLOGO</button>
+    </div>
+  </ng-template>
+</div>

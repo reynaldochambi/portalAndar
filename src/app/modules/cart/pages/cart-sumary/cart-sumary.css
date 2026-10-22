@@ -1,0 +1,140 @@
+.cart-page {
+  padding: 40px 5%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1 { color: #4d2618; margin-bottom: 30px; }
+
+/* Contenedor principal adaptable */
+.cart-container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+}
+
+/* Items */
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.item-details h3 { margin: 0; color: #4d2618; }
+.item-price { font-weight: bold; color: #b36b3d; }
+
+.btn-remove {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Card de Resumen */
+.summary-card {
+  background: #fdfaf8;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #eee;
+  height: fit-content;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #4d2618;
+}
+
+.free { color: green; font-weight: bold; }
+
+.btn-checkout {
+  width: 100%;
+  padding: 15px;
+  background: #4d2618;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-checkout:hover { background: #b36b3d; }
+
+.empty-state {
+  text-align: center;
+  padding: 50px;
+}
+
+.item-specs {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 6px 0;
+}
+
+.material-text {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 2px 0;
+}
+
+/* --- ADAPTACIÓN RESPONSIVA MÓVIL PARA EL CARRITO --- */
+@media (max-width: 868px) {
+  .cart-page {
+    padding: 20px 3%;
+  }
+
+  /* Cambia la estructura a una sola columna para que el resumen baje debajo de los productos */
+  .cart-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Ajuste de cada producto en pantallas pequeñas */
+  .cart-item {
+    padding: 12px;
+    position: relative;
+  }
+
+  .cart-item img {
+    width: 75px;
+    height: 75px;
+    margin-right: 12px;
+  }
+
+  .item-details h3 {
+    font-size: 0.95rem;
+  }
+
+  .item-specs {
+    font-size: 0.75rem;
+  }
+
+  /* Mover el botón de eliminar a una esquina superior o mantenerlo ordenado */
+  .btn-remove {
+    font-size: 1rem;
+  }
+
+  .summary-card {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="card-inventario">
+  <div class="info-header">
+    <h4>{{ producto.nombre }} - <small>{{ producto.color }}</small></h4>
+    <span class="total-label">Total: <strong>{{ totalPares }}</strong> pares</span>
+  </div>
+
+  <div class="grid-tallas">
+    @for (item of producto.existencias; track item.talla) {
+      <div class="talla-item" [class.agotado]="estaAgotado(item.cantidad)">
+        <span class="nro-talla">{{ item.talla }}</span>
+        <span class="cantidad-badge" [ngClass]="getBadgeClass(item.cantidad)">
+          {{ item.cantidad }}
+        </span>
+      </div>
+    }
+  </div>
+</div>

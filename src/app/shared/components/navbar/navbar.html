@@ -1,0 +1,32 @@
+<nav class="navbar-container">
+  <a routerLink="/" class="brand" (click)="closeMenu()">
+    <img src="assets/andar.jpg" class="mini-logo" alt="Logo Andar Bolivia">
+    <span class="brand-name">ANDAR BOLIVIA</span>
+  </a>
+
+  <!-- Botón Hamburguesa Móvil -->
+  <button class="hamburger-toggle" (click)="toggleMenu()" aria-label="Abrir menú">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <!-- Lista de Enlaces -->
+  <ul class="nav-links" [class.active]="isMenuOpen">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a></li>
+    <li><a routerLink="/taller" routerLinkActive="active" (click)="closeMenu()">El Taller</a></li>
+    <li><a routerLink="/catalog" routerLinkActive="active" (click)="closeMenu()">Catálogo</a></li>
+    <li><a routerLink="/ofertas" routerLinkActive="active" (click)="closeMenu()">Ofertas</a></li>
+    <li><a routerLink="/contacto" routerLinkActive="active" (click)="closeMenu()">Contactos</a></li>
+  </ul>
+
+  <!-- Acciones (Carrito + Botón Salir) -->
+  <div class="nav-actions">
+    <div class="cart-container" routerLink="/cart" style="cursor: pointer;" (click)="closeMenu()">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-badge" *ngIf="cantidadCarrito > 0">{{ cantidadCarrito }}</span>
+    </div>
+
+    <!--  <button class="btn-logout" routerLink="/auth/login" (click)="closeMenu()">SALIR</button> -->
+  </div>
+</nav>

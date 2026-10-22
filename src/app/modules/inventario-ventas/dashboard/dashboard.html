@@ -1,0 +1,58 @@
+<div class="main-container">
+  <div class="card">
+    <div class="card-header">
+      <h3>🚀 Registro de Nuevo Modelo de Calzado</h3>
+    </div>
+
+    <form [formGroup]="productoForm" (ngSubmit)="guardar()">
+      <div class="form-grid">
+        <div class="field">
+          <label>Código Artículo</label>
+          <input type="text" formControlName="codigoArticulo" placeholder="Ej: ZAP-100">
+        </div>
+        <div class="field">
+          <label>Nombre del Modelo</label>
+          <input type="text" formControlName="nombre" placeholder="Ej: Botín Casual">
+        </div>
+        <div class="field">
+          <label>Color</label>
+          <input type="text" formControlName="color" placeholder="Ej: Negro Mate">
+        </div>
+        <div class="field">
+          <label>Precio de Venta (BOB)</label>
+          <input type="number" formControlName="precioVenta">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="tallas-section">
+        <div class="section-header">
+          <h4>📏 Disponibilidad por Tallas</h4>
+          <button type="button" class="btn-add" (click)="agregarTalla()">+ Añadir Talla</button>
+        </div>
+
+        <div formArrayName="existencias">
+          @for (item of existencias.controls; track item; let i = $index) {
+            <div [formGroupName]="i" class="talla-row">
+              <div class="field">
+                <label>Nro. Talla</label>
+                <input type="number" formControlName="talla">
+              </div>
+              <div class="field">
+                <label>Cantidad (Pares)</label>
+                <input type="number" formControlName="cantidad">
+              </div>
+              <button type="button" class="btn-remove" (click)="removerTalla(i)">✕</button>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="productoForm.invalid">Guardar en Inventario</button>
+      </div>
+    </form>
+  </div>
+</div>

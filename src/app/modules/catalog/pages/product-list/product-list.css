@@ -1,0 +1,430 @@
+/* AJUSTES */
+:host {
+  --andar-brown: #4d2618;
+  --andar-leather: #b36b3d;
+}
+
+/* Títulos dentro de la cabecera */
+.header-catalog h2 {
+  font-size: 2rem;
+  color: var(--andar-brown);
+  margin-bottom: 20px;
+}
+
+.catalog-wrapper { padding: 40px 5%; }
+.header-catalog { text-align: center; padding: 20px 5%; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product-card:hover { transform: translateY(-5px); }
+
+.img-container img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.info-card { padding: 15px; }
+.info-card h3 { color: #4d2618; margin: 0; }
+.material-text { font-size: 0.8rem; color: #777; margin: 10px 0; }
+
+.footer-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.precio-text { font-weight: bold; color: #b36b3d; font-size: 1.2rem; }
+
+/* Estilos básicos para el Modal/Popup */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 1000;
+}
+.modal-content { background: white; padding: 30px; border-radius: 15px; width: 80%; max-width: 700px; position: relative; }
+.modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.modal-body img { width: 100%; border-radius: 10px; }
+
+/* BOTONES DE FILTROS (Arriba) */
+.filtros {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap; /* Permite que los botones pasen a la siguiente línea en móviles */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.filtros button {
+  background-color: #ffffff;
+  border: 2px solid #b36b3d;
+  color: #4d2618;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Evita que el texto interno del botón se rompa torpemente */
+}
+
+.filtros button:hover,
+.filtros button.active {
+  background-color: #4d2618;
+  border-color: #4d2618;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Adaptación para Celulares (< 600px) */
+@media (max-width: 600px) {
+  .header-catalog h2 {
+    font-size: 1.5rem;
+  }
+
+  .filtros {
+    gap: 8px;
+  }
+
+  .filtros button {
+    flex: 1 1 calc(50% - 10px); /* Muestra los botones organizados en 2 columnas parejas */
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+}
+
+/* BOTÓN DE LA TARJETA (El que dice "Ver detalle") */
+.btn-ver {
+  background-color: var(--andar-leather);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-ver:hover {
+  background-color: var(--andar-brown);
+}
+
+/* BOTÓN DENTRO DEL POPUP (Añadir al carrito) */
+.btn-cart {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--andar-brown);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(77, 38, 24, 0.2);
+}
+
+.btn-cart:hover {
+  background-color: var(--andar-leather);
+  transform: scale(1.02);
+}
+
+/* AJUSTES */
+/* Botón de cierre en la ventana emergente */
+.close-x {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--andar-brown);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.close-x:hover {
+  color: var(--andar-leather);
+}
+
+
+
+
+/* Modal Emergente Estilizado (Catálogo) */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: white;
+  padding: 26px 28px;
+  border-radius: 16px;
+  width: 88%;
+  max-width: 480px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close-x {
+  position: absolute;
+  top: 15px; 
+  right: 18px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.close-x:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.05);
+}
+
+.modal-body-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Imagen del modal principal */
+.modal-img-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #efe8de;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Cabecera del modal */
+.header-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.header-info-row h2 {
+  font-size: 1.2rem;
+  color: var(--andar-brown);
+  margin: 2px 0 0 0;
+  font-weight: 800;
+}
+
+.categoria-tag {
+  font-size: 0.75rem;
+  color: var(--andar-leather);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.modal-price-box-top {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.current-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #d32f2f;
+  line-height: 1.1;
+}
+
+/* Caja de especificaciones */
+.specs-box {
+  margin-bottom: 8px;
+  background: #fbf9f7;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--andar-leather);
+}
+
+.specs-box p {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 3px 0;
+  line-height: 1.4;
+}
+
+.options-box {
+  margin-top: 8px;
+}
+
+.options-box p {
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  color: #2b2b2b;
+}
+
+.selected-label {
+  font-weight: bold;
+  color: var(--andar-brown);
+}
+
+/* Selección de Colores */
+.colores-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  padding: 4px 10px 4px 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+}
+
+.color-item img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.color-item.selected {
+  border-color: var(--andar-brown);
+  background-color: #f2e9e4;
+  font-weight: bold;
+  color: var(--andar-brown);
+  box-shadow: 0 0 0 1px var(--andar-brown);
+}
+
+/* Fila para Talla y Cantidad */
+.talla-cantidad-row {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.tallas-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.talla-item {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.talla-item.selected {
+  background-color: var(--andar-brown);
+  color: white;
+  border-color: var(--andar-brown);
+}
+
+.quantity-selector {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+
+.btn-qty {
+  background: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--andar-brown);
+}
+
+.qty-number {
+  width: 28px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+/* Botón Añadir al Carrito (WhatsApp) */
+.btn-whatsapp-modal {
+  width: 100%;
+  padding: 12px;
+  background: #25d366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  margin-top: 12px;
+}
+
+.btn-whatsapp-modal:hover:not(:disabled) {
+  background: #1eb956;
+  transform: translateY(-1px);
+}
+
+.btn-whatsapp-modal:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
